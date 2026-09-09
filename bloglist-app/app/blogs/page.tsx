@@ -1,14 +1,16 @@
+import Link from 'next/link'
 import { getAllBlogs } from '../services/blogs'
 
 export default function Blogs() {
   const blogs = getAllBlogs()
+
   return (
     <div>
       <h1>Blogs</h1>
 
       {blogs.map((blog) => (
         <div key={blog.id}>
-          {blog.title}
+          <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
           <ul>
             <li>Author: {blog.author}</li>
             <li>ID: {blog.id}</li>

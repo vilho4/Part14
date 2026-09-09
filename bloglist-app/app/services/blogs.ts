@@ -26,3 +26,7 @@ export function createBlog(blog: { title: string; author: string; url: string })
   blogs.push(newBlog)
   return newBlog
 }
+
+export function getBlogById(id: number) {
+  return blogs.find((blog) => blog.id === id)
+}
