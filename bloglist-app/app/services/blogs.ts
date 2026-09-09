@@ -30,3 +30,11 @@ export function createBlog(blog: { title: string; author: string; url: string })
 export function getBlogById(id: number) {
   return blogs.find((blog) => blog.id === id)
 }
+
+export function likeBlog(id: number) {
+  const blog = getBlogById(id)
+  if (blog) {
+    blog.likes++
+  }
+  return blog
+}
