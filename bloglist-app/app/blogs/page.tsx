@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { getAllBlogs } from '../services/blogs'
 
 export default function Blogs() {
-  const blogs = getAllBlogs()
+  const blogs = getAllBlogs().toSorted((a, b) => b.likes - a.likes)
 
   return (
     <div>

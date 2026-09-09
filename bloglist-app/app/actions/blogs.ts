@@ -19,5 +19,6 @@ export const likeBlogAction = async (formData: FormData) => {
 
   likeBlog(id)
 
+  revalidatePath('/blogs')
   revalidatePath(`/blogs/${id}`)
 }
