@@ -1,21 +1,7 @@
-const blogs = [
-  {
-    id: 1,
-    title: 'React patterns',
-    author: 'Michael Chan',
-    url: 'https://reactpatterns.com/',
-    likes: 7,
-  },
-  {
-    id: 2,
-    title: 'Go To Statement Considered Harmful',
-    author: 'Edsger W. Dijkstra',
-    url: 'https://example.com',
-    likes: 5,
-  },
-]
+import { getAllBlogs } from '../services/blogs'
 
 export default function Blogs() {
+  const blogs = getAllBlogs()
   return (
     <div>
       <h1>Blogs</h1>
