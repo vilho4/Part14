@@ -1,16 +1,31 @@
 import Link from 'next/link'
 import { getAllBlogs } from '../services/blogs'
 
-export default function Blogs() {
-  const blogs = getAllBlogs().toSorted((a, b) => b.likes - a.likes)
+export default async function Blogs({
+  searchParams,
+}: {
+  searchParams: Promise<{ filter?: string }>
+}) {
+  const { filter } = await searchParams
+  const searchQuery = filter?.toLowerCase() ?? ''
+
+  const blogs = getAllBlogs()
+    .filter((blog) => blog.title.toLowerCase().includes(searchQuery))
+    .toSorted((a, b) => b.likes - a.likes)
 
   return (
     <div>
       <h1>Blogs</h1>
 
+      <form>
+        <input type="text" name="filter" defaultValue={filter ?? ''} />
+        <button type="submit">Search</button>
+      </form>
+
       {blogs.map((blog) => (
         <div key={blog.id}>
           <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
+
           <ul>
             <li>Author: {blog.author}</li>
             <li>ID: {blog.id}</li>
