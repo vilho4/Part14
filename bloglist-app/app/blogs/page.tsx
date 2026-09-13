@@ -9,7 +9,8 @@ export default async function Blogs({
   const { filter } = await searchParams
   const searchQuery = filter?.toLowerCase() ?? ''
 
-  const blogs = getAllBlogs()
+  const blogs = await getAllBlogs()
+  const displayedBlogs = blogs
     .filter((blog) => blog.title.toLowerCase().includes(searchQuery))
     .toSorted((a, b) => b.likes - a.likes)
 
@@ -22,7 +23,7 @@ export default async function Blogs({
         <button type="submit">Search</button>
       </form>
 
-      {blogs.map((blog) => (
+      {displayedBlogs.map((blog) => (
         <div key={blog.id}>
           <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
 

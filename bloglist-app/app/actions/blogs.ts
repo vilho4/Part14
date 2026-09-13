@@ -17,7 +17,7 @@ export const createBlogAction = async (formData: FormData) => {
 export const likeBlogAction = async (formData: FormData) => {
   const id = Number(formData.get('id'))
 
-  likeBlog(id)
+  await likeBlog(id)
 
   revalidatePath('/blogs')
   revalidatePath(`/blogs/${id}`)
