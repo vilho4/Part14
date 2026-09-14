@@ -32,6 +32,7 @@ export default async function Blogs({
             <li>ID: {blog.id}</li>
             <li>URL: {blog.url}</li>
             <li>Likes: {blog.likes}</li>
+            <li>User ID: {blog.userId}</li>
           </ul>
         </div>
       ))}

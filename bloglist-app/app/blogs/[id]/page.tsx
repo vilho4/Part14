@@ -26,6 +26,7 @@ export default async function BlogPage({ params }: { params: Promise<{ id: strin
             <button type="submit">Like</button>
           </form>
         </li>
+        <li>User ID: {blog.userId}</li>
       </ul>
     </div>
   )
