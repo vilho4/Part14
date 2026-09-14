@@ -3,6 +3,7 @@ import { getUsers } from '../services/users'
 
 const Users = async () => {
   const users = await getUsers()
+  console.log('Users:', users) // Log the users to the console for debugging
 
   return (
     <div>
@@ -10,7 +11,7 @@ const Users = async () => {
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            <Link href={`/users/${user.id}`}>{user.username}</Link>
+            <Link href={`/users/${user.username}`}>{user.username}</Link>
           </li>
         ))}
       </ul>
