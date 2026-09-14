@@ -1,5 +1,4 @@
 const Home = () => {
-  console.log('serverin puolella')
   return (
     <div>
       <div>

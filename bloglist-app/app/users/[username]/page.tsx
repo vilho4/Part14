@@ -12,16 +12,20 @@ const UserPage = async ({ params }: { params: Promise<{ username: string }> }) =
 
   return (
     <div>
-      <h2>{user.username}</h2>
-
+      <h2>{user.name ? `${user.username} alias ${user.name}` : user.username}</h2>
       <h3>Blogs</h3>
-      <ul>
-        {user.blogs.map((blog) => (
-          <li key={blog.id}>
-            <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
-          </li>
-        ))}
-      </ul>
+
+      {user.blogs.length === 0 ? (
+        <p>User has not added any blogs.</p>
+      ) : (
+        <ul>
+          {user.blogs.map((blog) => (
+            <li key={blog.id}>
+              <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

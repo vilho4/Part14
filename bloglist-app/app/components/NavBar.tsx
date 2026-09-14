@@ -26,7 +26,9 @@ export default function NavBar() {
       ) : (
         <>
           {' | '}
-          <button onClick={() => signIn()}>Sign in</button>
+          <Link href="/login">login</Link>
+          {' | '}
+          <Link href="/register">register</Link>
         </>
       )}
     </nav>
