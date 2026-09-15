@@ -14,6 +14,10 @@ export const createBlog = async (blog: { title: string; author: string; url: str
     throw new Error('Not logged in')
   }
 
+  if (blog.title.length < 5 || blog.author.length < 5 || blog.url.length < 5) {
+    throw new Error('All fields must be at least 5 characters long')
+  }
+
   const [newBlog] = await db
     .insert(blogs)
     .values({
