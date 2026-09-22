@@ -12,7 +12,7 @@ export default async function MePage() {
   return (
     <div className="page-narrow">
       <div className="card">
-        <h1>My page</h1>
+        <h1>My profile</h1>
 
         <p>
           <strong>Name:</strong> {user.name ?? 'Not provided'}
@@ -23,9 +23,11 @@ export default async function MePage() {
         </p>
 
         <h2>API token</h2>
-
         {user.token ? (
-          <p className="break-all">{user.token}</p>
+          <div>
+            <p className="text-muted">Current token:</p>
+            <p className="break-all">{user.token}</p>
+          </div>
         ) : (
           <p className="text-muted">No API token generated yet.</p>
         )}
