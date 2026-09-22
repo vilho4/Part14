@@ -41,32 +41,40 @@ export default function NewBlog() {
     }
   }, [state.success, showNotification, router])
   return (
-    <div>
-      <h2>Create a new blog</h2>
-      <form action={formAction}>
-        <div>
-          <label>
-            Title
-            <input type="text" name="title" defaultValue={state.values.title} required />
-          </label>
-          {state.errors.title && <div className="text-red-500">{state.errors.title}</div>}
-        </div>
-        <div>
-          <label>
-            Author
-            <input type="text" name="author" defaultValue={state.values.author} required />
-          </label>
-          {state.errors.author && <div className="text-red-500">{state.errors.author}</div>}
-        </div>
-        <div>
-          <label>
-            URL
-            <input type="url" name="url" defaultValue={state.values.url} required />
-          </label>
-          {state.errors.url && <div className="text-red-500">{state.errors.url}</div>}
-        </div>
-        <button type="submit">Create</button>
-      </form>
+    <div className="page-narrow">
+      <div className="card">
+        <h1>Create a new blog</h1>
+
+        <form action={formAction}>
+          <div className="form-group">
+            <label>
+              Title
+              <input type="text" name="title" defaultValue={state.values.title} required />
+            </label>
+            {state.errors.title && <div className="form-error">{state.errors.title}</div>}
+          </div>
+
+          <div className="form-group">
+            <label>
+              Author
+              <input type="text" name="author" defaultValue={state.values.author} required />
+            </label>
+            {state.errors.author && <div className="form-error">{state.errors.author}</div>}
+          </div>
+
+          <div className="form-group">
+            <label>
+              URL
+              <input type="url" name="url" defaultValue={state.values.url} required />
+            </label>
+            {state.errors.url && <div className="form-error">{state.errors.url}</div>}
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Create
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

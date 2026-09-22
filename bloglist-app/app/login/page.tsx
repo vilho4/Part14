@@ -28,24 +28,32 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Username
-            <input type="text" name="username" required />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
-            <input type="password" name="password" required />
-          </label>
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <div className="page-narrow">
+      <div className="card">
+        <h1>Login</h1>
+
+        {error && <div className="form-error mb-4">{error}</div>}
+
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>
+              Username
+              <input type="text" name="username" autoComplete="username" required />
+            </label>
+          </div>
+
+          <div className="form-group">
+            <label>
+              Password
+              <input type="password" name="password" autoComplete="current-password" required />
+            </label>
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

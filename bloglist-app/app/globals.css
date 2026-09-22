@@ -1,14 +1,26 @@
 @import 'tailwindcss';
 
+/* --------------------------------------------------
+   Theme
+-------------------------------------------------- */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f3f4f6;
+  --foreground: #111827;
+
+  --surface: #ffffff;
+  --surface-hover: #f9fafb;
+  --border: #d1d5db;
 
   --input-background: #ffffff;
-  --input-foreground: #171717;
+  --input-foreground: #111827;
   --input-border: #9ca3af;
 
   --link: #1d4ed8;
+  --muted: #6b7280;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
 
   color-scheme: light;
 }
@@ -16,8 +28,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Arial, Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,58 +36,233 @@
     --background: #111827;
     --foreground: #f3f4f6;
 
-    --input-background: #1f2937;
+    --surface: #1f2937;
+    --surface-hover: #374151;
+    --border: #4b5563;
+
+    --input-background: #111827;
     --input-foreground: #f9fafb;
     --input-border: #6b7280;
 
-    --link: #60a5fa;
+    --link: #93c5fd;
+    --muted: #9ca3af;
+
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
 
     color-scheme: dark;
   }
 }
 
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* --------------------------------------------------
+   Base
+-------------------------------------------------- */
 
-input,
-textarea,
-select {
-  border: 1px solid var(--input-border);
-  border-radius: 4px;
-  padding: 4px 8px;
-  background: var(--input-background);
-  color: var(--input-foreground);
-}
+@layer base {
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+  }
 
-input::placeholder,
-textarea::placeholder {
-  color: #9ca3af;
-}
+  h1 {
+    @apply mb-6 text-3xl font-bold;
+  }
 
-input:focus,
-textarea:focus,
-select:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 1px;
-}
+  h2 {
+    @apply mb-4 text-2xl font-semibold;
+  }
 
-button,
-input[type='button'],
-input[type='submit'] {
-  cursor: pointer;
-}
+  h3 {
+    @apply mb-3 text-xl font-semibold;
+  }
 
-a {
-  color: var(--link);
-}
+  p {
+    @apply mb-3;
+  }
 
-@media (prefers-color-scheme: dark) {
+  a {
+    color: var(--link);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    background: var(--input-background);
+    color: var(--input-foreground);
+  }
+
   input::placeholder,
   textarea::placeholder {
-    color: #9ca3af;
+    color: var(--muted);
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+
+  button,
+  input[type='button'],
+  input[type='submit'] {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* Search */
+
+  .search-form {
+    @apply mb-6 flex w-full items-center gap-2;
+  }
+
+  .search-form input {
+    @apply min-w-0 flex-1;
+  }
+
+  .search-form button {
+    @apply shrink-0;
+  }
+}
+
+/* --------------------------------------------------
+   Reusable components
+-------------------------------------------------- */
+
+@layer components {
+  /* Page layout */
+
+  .page-container {
+    @apply mx-auto w-full max-w-5xl px-4 py-8;
+  }
+
+  .page-narrow {
+    @apply mx-auto w-full max-w-xl px-4 py-8;
+  }
+
+  /* Cards */
+
+  .card {
+    @apply rounded-lg border p-5 shadow-sm;
+
+    background: var(--surface);
+    border-color: var(--border);
+  }
+
+  .card-hover:hover {
+    background: var(--surface-hover);
+  }
+
+  /* Forms */
+
+  .form-container {
+    @apply mx-auto w-full max-w-md;
+  }
+
+  .form-group {
+    @apply mb-4;
+  }
+
+  .form-group label {
+    @apply mb-1 block font-medium;
+  }
+
+  .form-error {
+    @apply mt-1 text-sm text-red-500;
+  }
+
+  /* Buttons */
+
+  .btn {
+    @apply inline-flex items-center justify-center
+      rounded-md px-4 py-2 font-medium
+      transition-colors duration-150;
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+  }
+
+  .btn-success {
+    @apply bg-green-600 text-white hover:bg-green-700;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700;
+  }
+
+  .btn-secondary {
+    @apply border;
+
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--foreground);
+  }
+
+  .btn-secondary:hover {
+    background: var(--surface-hover);
+  }
+
+  /* Navigation */
+
+  .navbar {
+    @apply border-b;
+
+    background: var(--surface);
+    border-color: var(--border);
+  }
+
+  .navbar-content {
+    @apply mx-auto flex max-w-5xl
+      flex-wrap items-center gap-4
+      px-4 py-4;
+  }
+
+  .navbar a {
+    color: var(--foreground);
+  }
+
+  .navbar a:hover {
+    color: var(--link);
+  }
+
+  /* Blog list */
+
+  .blog-list {
+    @apply space-y-4;
+  }
+
+  .blog-item {
+    @apply rounded-lg border p-4
+      transition-colors duration-150;
+
+    background: var(--surface);
+    border-color: var(--border);
+  }
+
+  .blog-item:hover {
+    background: var(--surface-hover);
+  }
+
+  /* Additional text */
+
+  .text-muted {
+    color: var(--muted);
   }
 }

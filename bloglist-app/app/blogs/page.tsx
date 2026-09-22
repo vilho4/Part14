@@ -15,27 +15,31 @@ export default async function Blogs({
     .toSorted((a, b) => b.likes - a.likes)
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Blogs</h1>
 
-      <form>
+      <form className="search-form">
         <input type="text" name="filter" defaultValue={filter ?? ''} />
-        <button type="submit">Search</button>
+        <button type="submit" className="btn btn-primary">
+          Search
+        </button>
       </form>
 
-      {displayedBlogs.map((blog) => (
-        <div key={blog.id}>
-          <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
+      <div className="blog-list">
+        {displayedBlogs.map((blog) => (
+          <div key={blog.id} className="blog-item">
+            <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
 
-          <ul>
-            <li>Author: {blog.author}</li>
-            <li>ID: {blog.id}</li>
-            <li>URL: {blog.url}</li>
-            <li>Likes: {blog.likes}</li>
-            <li>User ID: {blog.userId}</li>
-          </ul>
-        </div>
-      ))}
+            <ul>
+              <li>Author: {blog.author}</li>
+              <li>ID: {blog.id}</li>
+              <li>URL: {blog.url}</li>
+              <li>Likes: {blog.likes}</li>
+              <li>User ID: {blog.userId}</li>
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

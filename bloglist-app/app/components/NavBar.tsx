@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
-import { useNotification } from './NotificationContext'
 // import { useNotification } from './NotificationContext'
 
 export default function NavBar() {
@@ -10,33 +9,40 @@ export default function NavBar() {
   const { data: session } = useSession()
 
   return (
-    <nav>
-      <Link href="/">home</Link>
-      {' | '}
-      <Link href="/blogs">blogs</Link>
-      {' | '}
-      <Link href="/users">users</Link>
+    <nav className="navbar">
+      <div className="navbar-content">
+        <Link href="/" className="font-bold">
+          Bloglist
+        </Link>
 
-      {session ? (
-        <>
-          {' | '}
-          <Link href="/blogs/new">create new</Link>
-          {' | '}
-          <span>Signed in as {session.user?.name}</span>
-          {' | '}
-          <button onClick={() => signOut()}>Sign out</button>
-        </>
-      ) : (
-        <>
-          {' | '}
-          <Link href="/login">login</Link>
-          {' | '}
-          <Link href="/register">register</Link>
-        </>
-      )}
-      {/* <button onClick={() => showNotification('Test success')}>Test success</button>
+        <Link href="/blogs">Blogs</Link>
+        <Link href="/users">Users</Link>
 
-      <button onClick={() => showNotification('Test error', 'error')}>Test error</button> */}
+        {session ? (
+          <>
+            <Link href="/blogs/new">Create new</Link>
+
+            <div className="ml-auto flex items-center gap-4">
+              <span className="text-muted text-sm">Signed in as {session.user?.name}</span>
+
+              <button type="button" onClick={() => signOut()} className="btn btn-secondary">
+                Sign out
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="ml-auto flex items-center gap-4">
+            <Link href="/login">Login</Link>
+            <Link href="/register" className="btn btn-primary !text-white">
+              Register
+            </Link>
+          </div>
+        )}
+
+        {/* <button onClick={() => showNotification('Test success')}>Test success</button>
+
+        <button onClick={() => showNotification('Test error', 'error')}>Test error</button> */}
+      </div>
     </nav>
   )
 }

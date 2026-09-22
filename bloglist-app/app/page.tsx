@@ -1,21 +1,23 @@
 const Home = () => {
   return (
-    <div>
-      <div>
-        <h2>blogs app</h2>
-        An example app for{' '}
-        <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">
-          Full Stack Open Next.js
-        </a>
-      </div>
-      <div>
-        See{' '}
-        <a href="https://github.com/fullstack-hy2020/nextjs-notes">
-          https://github.com/fullstack-hy2020/nextjs-notes
-        </a>{' '}
-        for the source code
+    <div className="page-container">
+      <div className="card">
+        <h1>Bloglist</h1>
+
+        <p className="text-muted">
+          An example app for{' '}
+          <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">
+            Full Stack Open Next.js
+          </a>
+        </p>
+
+        <p className="text-muted mb-0">
+          See the <a href="https://github.com/fullstack-hy2020/nextjs-notes">source code</a> for the
+          example application.
+        </p>
       </div>
     </div>
   )
 }
+
 export default Home
