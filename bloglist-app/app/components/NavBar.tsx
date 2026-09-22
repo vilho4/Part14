@@ -21,6 +21,7 @@ export default function NavBar() {
         {session ? (
           <>
             <Link href="/blogs/new">Create new</Link>
+            <Link href="/me">Me</Link>
 
             <div className="ml-auto flex items-center gap-4">
               <span className="text-muted text-sm">Signed in as {session.user?.name}</span>
