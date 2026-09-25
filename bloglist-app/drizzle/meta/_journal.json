@@ -36,6 +36,20 @@
       "when": 1790098164290,
       "tag": "0004_burly_firebird",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790368870249,
+      "tag": "0005_reflective_blonde_phantom",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790373893103,
+      "tag": "0006_unknown_sway",
+      "breakpoints": true
     }
   ]
 }

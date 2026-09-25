@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm'
 import { db } from '../../db'
-import { blogs } from '../../db/schema'
+import { blogs, readingList } from '../../db/schema'
 import { getCurrentUser } from './session'
 
 export const getAllBlogs = async () => {
@@ -25,6 +25,11 @@ export const createBlog = async (blog: { title: string; author: string; url: str
       userId: user.id,
     })
     .returning()
+
+  await db.insert(readingList).values({
+    userId: user.id,
+    blogId: newBlog.id,
+  })
 
   return newBlog
 }

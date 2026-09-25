@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs'
 import { db } from '../../db'
 import { users } from '../../db/schema'
 import { eq } from 'drizzle-orm'
-import { getCurrentUser } from '../services/users'
+import { getCurrentUser } from '../services/session'
 
 export const registerUser = async (previousstate: unknown, formData: FormData) => {
   const username = (formData.get('username') as string)?.trim()

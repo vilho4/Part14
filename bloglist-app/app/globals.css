@@ -265,4 +265,38 @@
   .text-muted {
     color: var(--muted);
   }
+
+  /* Reading list */
+
+  .reading-list {
+    @apply space-y-2;
+  }
+
+  .reading-list-item {
+    @apply flex items-center justify-between gap-4
+    rounded-md border px-4 py-3
+    transition-colors duration-150;
+
+    border-color: var(--border);
+  }
+
+  .reading-list-item:hover {
+    background: var(--surface-hover);
+  }
+
+  .reading-list-title {
+    @apply font-medium;
+  }
+
+  .reading-list-author {
+    @apply text-sm;
+
+    color: var(--muted);
+  }
+}
+
+.blog-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
