@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { getCurrentUser } from '../services/session'
-import { addToReadingList } from '../services/readingList'
+import { addToReadingList, markAsRead } from '../services/readingList'
 
 export const addToReadingListAction = async (previousState: unknown, formData: FormData) => {
   const user = await getCurrentUser()
@@ -24,4 +24,12 @@ export const addToReadingListAction = async (previousState: unknown, formData: F
     success: true,
     error: '',
   }
+}
+
+export const markAsReadAction = async (formData: FormData) => {
+  const readingListId = Number(formData.get('readingListId'))
+
+  await markAsRead(readingListId)
+
+  revalidatePath('/me')
 }

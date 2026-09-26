@@ -24,3 +24,7 @@ export const getReadingList = async (userId: number) => {
     .innerJoin(blogs, eq(readingList.blogId, blogs.id))
     .where(eq(readingList.userId, userId))
 }
+
+export const markAsRead = async (readingListId: number) => {
+  await db.update(readingList).set({ read: true }).where(eq(readingList.id, readingListId))
+}

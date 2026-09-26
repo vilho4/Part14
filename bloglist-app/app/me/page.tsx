@@ -3,6 +3,7 @@ import { getCurrentUser } from '../services/session'
 import { generateTokenAction } from '../actions/users'
 import { getReadingList } from '../services/readingList'
 import Link from 'next/link'
+import { markAsReadAction } from '../actions/readingList'
 
 export default async function MePage() {
   const user = await getCurrentUser()
@@ -12,6 +13,9 @@ export default async function MePage() {
   }
 
   const readingList = await getReadingList(user.id)
+
+  const unreadBlogs = readingList.filter((item) => !item.reading_list.read)
+  const readBlogs = readingList.filter((item) => item.reading_list.read)
 
   return (
     <div className="page-narrow">
@@ -48,19 +52,55 @@ export default async function MePage() {
       {readingList.length === 0 ? (
         <p className="text-muted">Your reading list is empty.</p>
       ) : (
-        <ul className="reading-list">
-          {readingList.map((item) => (
-            <li key={item.reading_list.id} className="reading-list-item">
-              <div>
-                <Link href={`/blogs/${item.blogs.id}`} className="reading-list-title">
-                  {item.blogs.title}
-                </Link>
+        <>
+          <h3>Unread ({unreadBlogs.length})</h3>
 
-                <div className="reading-list-author">by {item.blogs.author}</div>
-              </div>
-            </li>
-          ))}
-        </ul>
+          {unreadBlogs.length === 0 ? (
+            <p className="text-muted">No unread blogs.</p>
+          ) : (
+            <ul className="reading-list">
+              {unreadBlogs.map((item) => (
+                <li key={item.reading_list.id} className="reading-list-item">
+                  <div>
+                    <Link href={`/blogs/${item.blogs.id}`} className="reading-list-title">
+                      {item.blogs.title}
+                    </Link>
+
+                    <div className="reading-list-author">by {item.blogs.author}</div>
+                  </div>
+
+                  <form action={markAsReadAction}>
+                    <input type="hidden" name="readingListId" value={item.reading_list.id} />
+
+                    <button type="submit" className="btn btn-success">
+                      Mark as read
+                    </button>
+                  </form>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <h3 className="mt-6">Read ({readBlogs.length})</h3>
+
+          {readBlogs.length === 0 ? (
+            <p className="text-muted">No read blogs.</p>
+          ) : (
+            <ul className="reading-list">
+              {readBlogs.map((item) => (
+                <li key={item.reading_list.id} className="reading-list-item">
+                  <div>
+                    <Link href={`/blogs/${item.blogs.id}`} className="reading-list-title">
+                      {item.blogs.title}
+                    </Link>
+
+                    <div className="reading-list-author">by {item.blogs.author}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
       )}
     </div>
   )
