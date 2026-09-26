@@ -2,14 +2,18 @@ name: End-to-End Tests
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: bloglist-app
 
     steps:
       - uses: actions/checkout@v4
@@ -48,7 +52,7 @@ jobs:
           fi
 
       - name: Run database migrations
-        run: npx drizzle-kit push
+        run: NODE_ENV=test npx drizzle-kit push
 
       - name: Run Playwright tests
         run: npx playwright test
@@ -57,5 +61,5 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
-          path: playwright-report/
+          path: bloglist-app/playwright-report/
           retention-days: 30
