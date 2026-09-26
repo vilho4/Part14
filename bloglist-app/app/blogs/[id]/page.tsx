@@ -4,6 +4,27 @@ import { getCurrentUser } from '../../services/session'
 import { likeBlogAction } from '@/app/actions/blogs'
 import AddToReadingListButton from '@/app/components/AddToReadingListButton'
 import { isInReadingList } from '@/app/services/readingList'
+import type { Metadata } from 'next'
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> => {
+  const { id } = await params
+  const blog = await getBlogById(Number(id))
+
+  if (!blog) {
+    return {
+      title: 'Blog not found | Bloglist',
+    }
+  }
+
+  return {
+    title: `${blog.title} | Bloglist`,
+    description: `Read ${blog.title} by ${blog.author}`,
+  }
+}
 
 export default async function BlogPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

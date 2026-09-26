@@ -5,8 +5,6 @@ import { useNotification } from './NotificationContext'
 export default function Notification() {
   const { message, type } = useNotification()
 
-  console.log('Notification message:', message) // väliaikainen testi
-
   if (!message) return null
 
   return (

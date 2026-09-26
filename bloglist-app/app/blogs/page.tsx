@@ -1,5 +1,11 @@
 import Link from 'next/link'
 import { getAllBlogs } from '../services/blogs'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Blogs | Bloglist',
+  description: 'Browse blogs shared by Bloglist users',
+}
 
 export default async function Blogs({
   searchParams,
