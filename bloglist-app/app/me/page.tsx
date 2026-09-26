@@ -19,89 +19,108 @@ export default async function MePage() {
 
   return (
     <div className="page-narrow">
-      <div className="card">
+      <div className="card" data-testid="user-profile">
         <h1>My profile</h1>
 
-        <p>
+        <p data-testid="user-name">
           <strong>Name:</strong> {user.name ?? 'Not provided'}
         </p>
 
-        <p>
+        <p data-testid="user-username">
           <strong>Username:</strong> {user.username}
         </p>
 
-        <h2>API token</h2>
-        {user.token ? (
-          <div>
-            <p className="text-muted">Current token:</p>
-            <p className="break-all">{user.token}</p>
-          </div>
-        ) : (
-          <p className="text-muted">No API token generated yet.</p>
-        )}
+        <div data-testid="api-token-section">
+          <h2>API token</h2>
 
-        <form action={generateTokenAction}>
-          <button type="submit" className="btn btn-primary">
-            Generate new token
-          </button>
-        </form>
+          {user.token ? (
+            <div data-testid="token-display">
+              <p className="text-muted">Current token:</p>
+              <p className="break-all" data-testid="api-token">
+                {user.token}
+              </p>
+            </div>
+          ) : (
+            <p className="text-muted" data-testid="no-token-message">
+              No API token generated yet.
+            </p>
+          )}
+
+          <form action={generateTokenAction}>
+            <button type="submit" className="btn btn-primary" data-testid="generate-token-button">
+              Generate new token
+            </button>
+          </form>
+        </div>
       </div>
 
-      <h2 className="mt-8">Reading list</h2>
+      <div data-testid="reading-list-section">
+        <h2 className="mt-8">Reading list</h2>
 
-      {readingList.length === 0 ? (
-        <p className="text-muted">Your reading list is empty.</p>
-      ) : (
-        <>
-          <h3>Unread ({unreadBlogs.length})</h3>
+        {readingList.length === 0 ? (
+          <p className="text-muted" data-testid="empty-reading-list">
+            Your reading list is empty.
+          </p>
+        ) : (
+          <>
+            <div data-testid="unread-section">
+              <h3>Unread ({unreadBlogs.length})</h3>
 
-          {unreadBlogs.length === 0 ? (
-            <p className="text-muted">No unread blogs.</p>
-          ) : (
-            <ul className="reading-list">
-              {unreadBlogs.map((item) => (
-                <li key={item.reading_list.id} className="reading-list-item">
-                  <div>
-                    <Link href={`/blogs/${item.blogs.id}`} className="reading-list-title">
-                      {item.blogs.title}
-                    </Link>
+              {unreadBlogs.length === 0 ? (
+                <p className="text-muted" data-testid="no-unread-blogs">
+                  No unread blogs.
+                </p>
+              ) : (
+                <ul className="reading-list">
+                  {unreadBlogs.map((item) => (
+                    <li key={item.reading_list.id} className="reading-list-item">
+                      <div>
+                        <Link href={`/blogs/${item.blogs.id}`} className="reading-list-title">
+                          {item.blogs.title}
+                        </Link>
 
-                    <div className="reading-list-author">by {item.blogs.author}</div>
-                  </div>
+                        <div className="reading-list-author">by {item.blogs.author}</div>
+                      </div>
 
-                  <form action={markAsReadAction}>
-                    <input type="hidden" name="readingListId" value={item.reading_list.id} />
+                      <form action={markAsReadAction}>
+                        <input type="hidden" name="readingListId" value={item.reading_list.id} />
 
-                    <button type="submit" className="btn btn-success">
-                      Mark as read
-                    </button>
-                  </form>
-                </li>
-              ))}
-            </ul>
-          )}
+                        <button
+                          type="submit"
+                          className="btn btn-success"
+                          data-testid={`mark-read-${item.reading_list.id}`}
+                        >
+                          Mark as read
+                        </button>
+                      </form>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
-          <h3 className="mt-6">Read ({readBlogs.length})</h3>
+            <h3 className="mt-6">Read ({readBlogs.length})</h3>
 
-          {readBlogs.length === 0 ? (
-            <p className="text-muted">No read blogs.</p>
-          ) : (
-            <ul className="reading-list">
-              {readBlogs.map((item) => (
-                <li key={item.reading_list.id} className="reading-list-item">
-                  <div>
-                    <Link href={`/blogs/${item.blogs.id}`} className="reading-list-title">
-                      {item.blogs.title}
-                    </Link>
+            {readBlogs.length === 0 ? (
+              <p className="text-muted">No read blogs.</p>
+            ) : (
+              <ul className="reading-list">
+                {readBlogs.map((item) => (
+                  <li key={item.reading_list.id} className="reading-list-item">
+                    <div>
+                      <Link href={`/blogs/${item.blogs.id}`} className="reading-list-title">
+                        {item.blogs.title}
+                      </Link>
 
-                    <div className="reading-list-author">by {item.blogs.author}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </>
-      )}
+                      <div className="reading-list-author">by {item.blogs.author}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        )}
+      </div>
     </div>
   )
 }

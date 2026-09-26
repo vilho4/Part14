@@ -39,11 +39,11 @@ export default async function BlogPage({ params }: { params: Promise<{ id: strin
 
   return (
     <div className="page-container">
-      <div className="card">
-        <h1>{blog.title}</h1>
+      <div className="card" data-testid="blog-detail">
+        <h1 data-testid="blog-title">{blog.title}</h1>
 
         <ul>
-          <li>Author: {blog.author}</li>
+          <li data-testid="blog-author">Author: {blog.author}</li>
           <li>
             URL: <a href={blog.url}>{blog.url}</a>
           </li>
@@ -55,6 +55,7 @@ export default async function BlogPage({ params }: { params: Promise<{ id: strin
                 Like
               </button>
             </form>
+
             {user && user.id !== blog.userId && (
               <AddToReadingListButton
                 blogId={blog.id}

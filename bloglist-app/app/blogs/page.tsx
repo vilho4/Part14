@@ -25,13 +25,13 @@ export default async function Blogs({
       <h1>Blogs</h1>
 
       <form className="search-form">
-        <input type="text" name="filter" defaultValue={filter ?? ''} />
-        <button type="submit" className="btn btn-primary">
+        <input type="text" name="filter" defaultValue={filter ?? ''} data-testid="filter-input" />
+        <button type="submit" className="btn btn-primary" data-testid="search-button">
           Search
         </button>
       </form>
 
-      <div className="blog-list">
+      <div className="blog-list" data-testid="blogs-list">
         {displayedBlogs.map((blog) => (
           <div key={blog.id} className="blog-item">
             <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
@@ -40,8 +40,7 @@ export default async function Blogs({
               <li>Author: {blog.author}</li>
               <li>ID: {blog.id}</li>
               <li>URL: {blog.url}</li>
-              <li>Likes: {blog.likes}</li>
-              {/* <li>User ID: {blog.userId}</li> */}
+              <li>{blog.likes} likes</li>
             </ul>
           </div>
         ))}

@@ -70,7 +70,7 @@ export default function NewBlog() {
             {state.errors.url && <div className="form-error">{state.errors.url}</div>}
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" data-testid="create-blog-button">
             Create
           </button>
         </form>

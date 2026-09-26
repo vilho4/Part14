@@ -1,4 +1,5 @@
 'use client'
+
 import Link from 'next/link'
 import { registerUser } from '../actions/users'
 import { useActionState } from 'react'
@@ -28,8 +29,21 @@ const initialState: FormState = {
   },
 }
 
+const FieldError = ({ error, testId }: { error?: string; testId: string }) => {
+  if (!error) {
+    return null
+  }
+
+  return (
+    <div className="form-error" data-testid={testId}>
+      {error}
+    </div>
+  )
+}
+
 export default function RegisterPage() {
   const [state, formAction] = useActionState(registerUser, initialState)
+
   return (
     <div className="page-narrow">
       <div className="card">
@@ -47,7 +61,7 @@ export default function RegisterPage() {
                 required
               />
             </label>
-            {state.errors.username && <div className="form-error">{state.errors.username}</div>}
+            <FieldError error={state.errors.username} testId="username-error" />
           </div>
 
           <div className="form-group">
@@ -61,7 +75,7 @@ export default function RegisterPage() {
                 required
               />
             </label>
-            {state.errors.name && <div className="form-error">{state.errors.name}</div>}
+            <FieldError error={state.errors.name} testId="name-error" />
           </div>
 
           <div className="form-group">
@@ -69,20 +83,18 @@ export default function RegisterPage() {
               Password
               <input type="password" name="password" autoComplete="new-password" required />
             </label>
-            {state.errors.password && <div className="form-error">{state.errors.password}</div>}
+            <FieldError error={state.errors.password} testId="password-error" />
           </div>
 
           <div className="form-group">
             <label>
-              Password Confirmation
+              Confirm Password
               <input type="password" name="passwordConfirm" autoComplete="new-password" required />
             </label>
-            {state.errors.passwordConfirm && (
-              <div className="form-error">{state.errors.passwordConfirm}</div>
-            )}
+            <FieldError error={state.errors.passwordConfirm} testId="passwordConfirm-error" />
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" data-testid="register-button">
             Register
           </button>
         </form>

@@ -12,30 +12,30 @@ export default function NavBar() {
     <nav className="navbar">
       <div className="navbar-content">
         <Link href="/" className="font-bold">
-          Bloglist
+          home
         </Link>
 
-        <Link href="/blogs">Blogs</Link>
-        <Link href="/users">Users</Link>
+        <Link href="/blogs">blogs</Link>
+        <Link href="/users">users</Link>
 
         {session ? (
           <>
-            <Link href="/blogs/new">Create new</Link>
-            <Link href="/me">Me</Link>
+            <Link href="/blogs/new">create new</Link>
+            <Link href="/me">me</Link>
 
             <div className="ml-auto flex items-center gap-4">
               <span className="text-muted text-sm">Signed in as {session.user?.name}</span>
 
               <button type="button" onClick={() => signOut()} className="btn btn-secondary">
-                Sign out
+                logout
               </button>
             </div>
           </>
         ) : (
           <div className="ml-auto flex items-center gap-4">
-            <Link href="/login">Login</Link>
+            <Link href="/login">login</Link>
             <Link href="/register" className="btn btn-primary !text-white">
-              Register
+              register
             </Link>
           </div>
         )}

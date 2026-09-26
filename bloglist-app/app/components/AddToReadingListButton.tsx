@@ -27,7 +27,11 @@ export default function AddToReadingListButton({
       {!isInReadingList && (
         <form action={formAction}>
           <input type="hidden" name="blogId" value={blogId} />
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            data-testid="add-to-reading-list-button"
+          >
             Add to reading list
           </button>
         </form>
