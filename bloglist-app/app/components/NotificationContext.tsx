@@ -21,7 +21,6 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
   const [type, setType] = useState<NotificationType>('success')
 
   const showNotification = (msg: string, notifType: NotificationType = 'success') => {
-    console.log('showNotification called:', msg) // väliaikainen testi
     setMessage(msg)
     setType(notifType)
 

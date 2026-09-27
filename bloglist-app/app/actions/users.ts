@@ -14,9 +14,6 @@ export const registerUser = async (previousstate: unknown, formData: FormData) =
   const password = formData.get('password') as string
   const passwordConfirm = formData.get('passwordConfirm') as string
 
-  console.log(password, 'password test')
-  console.log(passwordConfirm, 'password confirmation test')
-
   const errors: {
     username?: string
     name?: string
